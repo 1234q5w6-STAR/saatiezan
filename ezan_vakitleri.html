@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezan Vakitleri</title>
+</head>
+<body>
+
+    <h1>İstanbul Ezan Vakitleri</h1>
+    <div id="imsak"></div>
+    <div id="gunes"></div>
+    <div id="ogle"></div>
+    <div id="ikindi"></div>
+    <div id="aksam"></div>
+    <div id="yatsi"></div>
+
+    <script>
+        fetch("http://api.aladhan.com/v1/timingsByCity?city=Istanbul&country=Turkey&method=2")
+            .then(response => response.json())
+            .then(data => {
+                const timings = data.data.timings;
+
+                document.getElementById("imsak").textContent = "İmsak: " + timings.Imsak;
+                document.getElementById("gunes").textContent = "Güneş: " + timings.Fajr;
+                document.getElementById("ogle").textContent = "Öğle: " + timings.Dhuhr;
+                document.getElementById("ikindi").textContent = "İkindi: " + timings.Asr;
+                document.getElementById("aksam").textContent = "Akşam: " + timings.Maghrib;
+                document.getElementById("yatsi").textContent = "Yatsı: " + timings.Isha;
+            })
+            .catch(error => console.log("Veri alınırken hata oluştu: ", error));
+    </script>
+
+</body>
+</html>
